@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI English Practice</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.sh/@google/genai@^0.7.0"
+        }
+      }
+    </script>
+    <script type="module" src="index.tsx"></script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="starfield">
+        <div id="stars1"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+
+    <div id="level-selection-overlay">
+        <h2>Choose Your English Level</h2>
+        <p>This helps Alex adjust the conversation to your needs. You can change this later in settings.</p>
+        <div class="level-buttons">
+            <button id="level-beginner" data-level="Beginner">Beginner</button>
+            <button id="level-intermediate" data-level="Intermediate">Intermediate</button>
+            <button id="level-advanced" data-level="Advanced">Advanced</button>
+        </div>
+    </div>
+
+    <div id="app-container" class="hidden">
+        <header>
+            <h1>AI English Practice</h1>
+            <div id="settings-button" role="button" aria-label="Open settings">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                    <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                    <path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-16.6 19.4-28.8 19.4h-86.3c-3.5 11.5-7.9 22.3-13.1 32.5l39.4 43.3c6.2 6.9 8.9 16.6 6.9 25.4c-4.4 11.9-16.6 19.4-28.8 19.4h-60.8c-10.2 5.2-21 9.6-32.5 13.1V496c0 12.2-7.5 24.4-19.4 28.8c-8.7 3.2-18.4 .5-24.6-6.4l-39.4-43.3c-8.3-1.1-16.8-1.7-25.4-1.7s-17.1 .6-25.4 1.7l-39.4 43.3c-6.2 6.9-15.9 8.9-24.6 6.9c-11.9-4.4-19.4-16.6-19.4-28.8v-60.8c-11.5-3.5-22.3-7.9-32.5-13.1H48c-12.2 0-24.4-7.5-28.8-19.4c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4c-1.1-8.3-1.7-16.8-1.7-25.4s.6-17.1 1.7-25.4L16.1 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 16.6-19.4 28.8-19.4h86.3c3.5-11.5 7.9-22.3 13.1-32.5L98.7 75.4c-6.2-6.9-8.9-16.6-6.9-25.4c4.4-11.9 16.6-19.4 28.8-19.4h60.8c10.2-5.2 21-9.6 32.5-13.1V16c0-12.2 7.5-24.4 19.4-28.8c8.7-3.2 18.4-.5 24.6 6.4l39.4 43.3c8.3 1.1 16.8 1.7 25.4 1.7s17.1-.6 25.4-1.7l39.4-43.3c6.2-6.9 15.9-8.9 24.6-6.9c11.9 4.4 19.4 16.6 19.4 28.8v60.8c11.5 3.5 22.3 7.9 32.5 13.1H464c12.2 0 24.4 7.5 28.8 19.4zM256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128s128-57.3 128-128s-57.3-128-128-128z"/>
+                </svg>
+            </div>
+        </header>
+        <main id="chat-container">
+            <!-- Chat messages will be appended here -->
+        </main>
+        <footer>
+            <div id="mic-button" role="button" aria-label="Start recording">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor">
+                    <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                    <path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h144c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/>
+                </svg>
+            </div>
+            <div id="footer-error" class="hidden">
+                 <p class="error-title"><strong>Microphone access denied.</strong></p>
+                 <p class="error-message">To use voice chat, please allow microphone access in your browser's site settings.</p>
+            </div>
+        </footer>
+    </div>
+
+    <div id="settings-overlay" class="hidden">
+        <div class="settings-modal">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button id="close-settings-button" aria-label="Close settings">&times;</button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <label for="level-select">Language Level</label>
+                    <select id="level-select">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="voice-select">AI Voice</label>
+                    <select id="voice-select">
+                        <option>Loading voices...</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="speed-slider">Speech Speed</label>
+                    <div class="slider-container">
+                        <span>0.8x</span>
+                        <input type="range" id="speed-slider" min="0.8" max="1.5" step="0.1">
+                        <span>1.5x</span>
+                    </div>
+                </div>
+                 <div class="setting-item">
+                    <label>Font Size</label>
+                    <div class="button-group">
+                        <button class="font-size-btn" data-size="small">A-</button>
+                        <button class="font-size-btn" data-size="medium">A</button>
+                        <button class="font-size-btn" data-size="large">A+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="offline-overlay" class="hidden">
+        <div class="offline-content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor">
+                <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path d="M544 0c52.2 0 96 42.4 96 94.5v28.8c0 23.3-13.7 44.3-34.6 54.3L448 243.6l-50.7-42.3L448 141.6c16.5-8.2 27.8-24.8 29.4-44.5A55.5 55.5 0 0 0 424 40H320v55.9l80 66.7V40h80c8.8 0 16 7.2 16 16v16c0 8.8-7.2 16-16 16H400v16c0 8.8-7.2 16-16 16H320v16c0 8.8 7.2 16 16 16h64v16c0 8.8-7.2 16-16 16H320v16c0 8.8 7.2 16 16 16h48v21.2l-33.6 28L256 228.3 211.7 184 96 73.1 27.3 1.2C18.7-4.2 8.4-3 2.1 5.4S-3 24.3 1.2 32.9L96 128v16c-8.8 0-16 7.2-16 16s7.2 16 16 16v16c0 8.8-7.2 16-16 16s-16 7.2-16 16v16c-8.8 0-16 7.2-16 16s7.2 16 16 16v16c0 8.8-7.2 16-16 16s-16 7.2-16 16v16c-8.8 0-16 7.2-16 16s7.2 16 16 16v32c0 53 43 96 96 96h96c5.3 0 10.6-.4 15.8-1.2l99.3 82.8c11.3 9.4 27.4 10.2 39.9 2.1s20.6-22.3 20.6-36.2V288.5L528 224v64c0 8.8-7.2 16-16 16s-16-7.2-16-16v-48h-16c-8.8 0-16 7.2-16 16v32c0 8.8-7.2 16-16 16s-16-7.2-16-16v-32h-16c-8.8 0-16 7.2-16 16v32c0 8.8-7.2 16-16 16s-16-7.2-16-16v-48.5L352 192v-5.5l-80-66.7V80h16c8.8 0 16-7.2 16-16s-7.2-16-16-16h-16V32.4l160-133.3 50.7 42.3L448 3.6 509.4 65.4c21-10 34.6-31 34.6-54.3V34.5C544 15.5 544 0 544 0z"/>
+            </svg>
+            <h2>You're Offline</h2>
+            <p>Please check your internet connection to continue.</p>
+        </div>
+    </div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
