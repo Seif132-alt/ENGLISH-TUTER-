@@ -1,0 +1,7 @@
+{
+  "name": "AI English Practice",
+  "description": "Practice your English speaking with a friendly AI partner that gives you feedback.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
