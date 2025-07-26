@@ -1,11 +1,18 @@
-import { defineConfig } from 'vite';
 import path from 'path';
+import { defineConfig, loadEnv } from 'vite';
 
-export default defineConfig({
-  base: '/ENGLISH-TUTER-/', // اسم الريبو على GitHub بالضبط
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, '.'),
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, '.', '');
+  return {
+    base: '/ENGLISH-TUTER-/', // اسم الريبو على GitHub بالضبط
+    define: {
+      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
+      }
     }
-  }
+  };
 });
